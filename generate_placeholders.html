@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Placeholder Images</title>
+</head>
+<body>
+    <canvas id="canvas" style="display: none;"></canvas>
+    <script>
+        const images = [
+            { name: 'web-development.jpg', color: '#4A90E2', text: 'Web Development' },
+            { name: 'data-science.jpg', color: '#50E3C2', text: 'Data Science' },
+            { name: 'cloud-computing.jpg', color: '#F5A623', text: 'Cloud Computing' },
+            { name: 'cybersecurity.jpg', color: '#D0021B', text: 'Cybersecurity' },
+            { name: 'mobile-dev.jpg', color: '#7ED321', text: 'Mobile Development' },
+            { name: 'devops.jpg', color: '#9013FE', text: 'DevOps' },
+            { name: 'ai.jpg', color: '#4A4A4A', text: 'AI' },
+            { name: 'ui-ux.jpg', color: '#417505', text: 'UI/UX' },
+            { name: 'python.jpg', color: '#F8E71C', text: 'Python' },
+            { name: 'java.jpg', color: '#BD10E0', text: 'Java' },
+            { name: 'blockchain.jpg', color: '#50E3C2', text: 'Blockchain' },
+            { name: 'digital-marketing.jpg', color: '#9B9B9B', text: 'Digital Marketing' },
+            { name: 'networking.jpg', color: '#4A90E2', text: 'Networking' },
+            { name: 'testing.jpg', color: '#F5A623', text: 'Testing' },
+            { name: 'big-data.jpg', color: '#D0021B', text: 'Big Data' },
+            { name: 'iot.jpg', color: '#7ED321', text: 'IoT' },
+            { name: 'game-dev.jpg', color: '#9013FE', text: 'Game Dev' },
+            { name: 'business-analytics.jpg', color: '#4A4A4A', text: 'Business Analytics' },
+            { name: 'cloud-security.jpg', color: '#417505', text: 'Cloud Security' },
+            { name: 'frontend.jpg', color: '#F8E71C', text: 'Frontend' },
+            { name: 'about-us.jpg', color: '#2D9CDB', text: 'About Us' },
+            { name: 'hero-bg.jpg', color: '#2F80ED', text: 'Welcome to NGM Techgrowth' }
+        ];
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 800;
+        canvas.height = 600;
+
+        function generatePlaceholder(color, text) {
+            ctx.fillStyle = color;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 48px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(text, canvas.width/2, canvas.height/2);
+            
+            return canvas.toDataURL('image/jpeg', 0.8);
+        }
+
+        images.forEach(img => {
+            const dataUrl = generatePlaceholder(img.color, img.text);
+            const link = document.createElement('a');
+            link.download = img.name;
+            link.href = dataUrl;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+</body>
+</html>
